@@ -1,23 +1,39 @@
 using CreditApp.Api.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllers();
+builder.AddServiceDefaults();
+builder.AddRedisDistributedCache("redis");
 
-builder.Services.AddStackExchangeRedisCache(options =>
+builder.Services.AddControllers();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
+builder.Services.AddCors(options =>
 {
-    options.Configuration = builder.Configuration.GetConnectionString("redis");
+    options.AddPolicy("wasm", policy =>
+    {
+        policy.AllowAnyOrigin()
+              .WithMethods("GET")
+              .WithHeaders("Content-Type");
+    });
 });
 
-builder.Services.AddSingleton<CreditGenerator>();
-builder.Services.AddScoped<CreditService>();
-
-builder.Services.AddSwaggerGen();
+builder.Services.AddSingleton<ICreditGenerator, CreditGenerator>();
+builder.Services.AddScoped<ICreditService, CreditService>();
 
 var app = builder.Build();
 
-app.UseSwagger();
-app.UseSwaggerUI();
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
 
+app.MapDefaultEndpoints();
+app.UseHttpsRedirection();
+app.UseCors("wasm");
+app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
