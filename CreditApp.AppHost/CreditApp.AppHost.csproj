@@ -1,4 +1,4 @@
-<Project Sdk="Aspire.AppHost.Sdk/13.1.0">
+﻿<Project Sdk="Aspire.AppHost.Sdk/13.1.0">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -9,7 +9,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Aspire.Hosting.Redis" Version="13.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="10.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Client.Wasm\Client.Wasm.csproj" />
     <ProjectReference Include="..\CreditApp.Api\CreditApp.Api.csproj" />
+    <ProjectReference Include="..\CreditApp.Domain\CreditApp.Domain.csproj" />
+    <ProjectReference Include="..\CreditApp.ServiceDefaults\CreditApp.ServiceDefaults.csproj" />
   </ItemGroup>
 
 </Project>
