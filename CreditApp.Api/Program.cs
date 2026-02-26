@@ -1,4 +1,5 @@
 using CreditApp.Api.Services;
+using CreditApp.ServiceDefaults;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,7 +20,6 @@ builder.Services.AddCors(options =>
     });
 });
 
-builder.Services.AddSingleton<ICreditGenerator, CreditGenerator>();
 builder.Services.AddScoped<ICreditService, CreditService>();
 
 var app = builder.Build();
