@@ -2,13 +2,8 @@ using Google.Protobuf.WellKnownTypes;
 
 var builder = DistributedApplication.CreateBuilder(args);
 
-var redis = builder.AddRedis("redis");
-
-var redisCommander = builder.AddContainer("redis-commander", "rediscommander/redis-commander")
-    .WithEnvironment("REDIS_HOSTS", "local:redis:6379")
-    .WithReference(redis)
-    .WaitFor(redis)
-    .WithEndpoint(port: 8081, targetPort: 8081);
+var redis = builder.AddRedis("redis")
+    .WithRedisCommander();
 
 var api = builder.AddProject<Projects.CreditApp_Api>("api")
        .WithReference(redis)
