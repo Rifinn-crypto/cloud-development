@@ -1,8 +1,0 @@
-@CreditApp.Api_HostAddress = http://localhost:5144
-
-GET {{CreditApp.Api_HostAddress}}/api/credit/1
-Accept: application/json
-
-GET {{CreditApp.Api_HostAddress}}/api/credit/42
-Accept: application/json
-
