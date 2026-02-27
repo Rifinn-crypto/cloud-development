@@ -1,5 +1,8 @@
 ﻿namespace CreditApp.Domain.Data;
 
+/// <summary>
+/// Класс, представляющий кредитную заявку
+/// </summary>
 public class CreditApplication
 {
     /// <summary>

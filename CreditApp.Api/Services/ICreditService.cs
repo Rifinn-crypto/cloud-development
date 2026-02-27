@@ -2,6 +2,9 @@
 
 namespace CreditApp.Api.Services;
 
+/// <summary>
+/// Интерфейс сервиса для работы с кредитными заявками
+/// </summary>
 public interface ICreditService
 {
     /// <summary>
