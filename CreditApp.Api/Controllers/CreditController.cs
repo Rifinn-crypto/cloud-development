@@ -4,6 +4,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CreditApp.Api.Controllers;
 
+/// <summary>
+/// Контроллер для работы с кредитными заявками
+/// </summary>
 [ApiController]
 [Route("api/[controller]")]
 public class CreditController(
